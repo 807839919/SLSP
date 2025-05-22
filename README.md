@@ -19,39 +19,23 @@ With the proliferation of powerful image generative models, accurately and robus
 We propose Training-Free Skeptical Over-Smooth Region (TrSOR) Selection—a principled, generator-agnostic patch selection algorithm that identifies highly smooth, fluctuation-sensitive regions in an image via a statistical thresholding procedure based on local gradient energy. We then design a lightweight self-supervised pipeline to encode and reconstruct these patches, enabling generator-agnostic synthetic image detection without the need for any fake images during training.
 
 <p align='center'>  
-  <img src='figure/model.jpg' width='800'/>
+  <img src='Figure/model.jpg' width='400'/>
 </p>
 
 <p align='center'>  
-  <em>Overview of the Ag-BiGT model for pixel-level Segmentation-grounded Human-object Interaction detection.  The model consists of two main components: (1) an interactive bipartite graph transformer, which models both local and long-range dependencies by learning spatial and semantic relationships between human and object nodes, effectively distinguishing between interactive and non-interactive pairs, and (2) an agent-based interaction query generator for producing adaptive queries tailored to diverse human-object interactions.
+  <em>An overview of our architecture. Top: the first step to select Skeptical Over-Smooth Region by iterative estimation. Bottom: thesecond step to self-encode the fluctuations viaa bottleneck paradigm fashion.
 </em>
 </p>
 
 ## Datasets
-SHOI detection shares the same goal as HOI detection, also aiming to predict a set of interaction triples, but the only difference lies in the form of localization for humans and objects. More concretely, SHOI   emphasizes generated detailed and nuanced masks for each instance instead of the conventional coarse bounding boxes.
-
 <p align='center'>  
-  <img src='figure/compare2.jpg' width='300'/>
+  <img src='Figure/data.jpg' width='800'/>
 </p>
 
-Human-object Interaction (HOI) detection vs. Segmentation-grounded Human-Object Interaction (SHOI) detection.  (Left) illustrates an examplefrom the HICO-DET dataset. (Right) showcases the corresponding masks from our curated HICO-SG dataset. The conventional HOI task localizes humans and objects via bounding boxes involving irrelevant pixels. Our proposed SHOI task defines a more fine-grained and cleaner HOI representation with more accurate localizations of objects.
+
+Some examples of generated images in our Benchmark
 
 
-We present construct three SHOI datasets, including HICO-SG, VS-COCO and InterSeg
-
-<p align='center'>  
-  <img src='figure/data3.jpg' width='1200'/>
-</p>
-
-#### Automated Construction of SHOI Dataset using Pipeline
-In this study, we introduce a novel approach for the automated creation of Spatial Human-Object-Interaction (SHOI) datasets.  Our method leverages segmentation models in conjunction with multimodal large-scale models within a cohesive pipeline.  This pipeline facilitates the seamless generation of SHOI datasets, thereby streamlining the data acquisition process.
-#### Enhancement of Existing and Widely Used HOI Datasets
-Furthermore, we contribute to the advancement of the field by enhancing existing and widely adopted Human-Object-Interaction (HOI) datasets.  Through careful curation and augmentation techniques, we improve the quality and diversity of the dataset, addressing potential limitations present in conventional datasets.  
-
-
-<p align='center'>  
-  <img src='figure/step2.jpg' width='850'/>
-</p>
 
 ## Dependency
 
