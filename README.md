@@ -1,6 +1,6 @@
-# Ag-BiGT 
+# Secrets Lie in Smooth Patches: Synthetic Image Detection with Generator-Agnostic Pixel Fluctuations
 
-An implementation code for paper "Beyond Boxes: Towards SHOI with Interactive Graph Reasoning and Agent-Based Query Learning"
+An implementation code for paper "Secrets Lie in Smooth Patches: Synthetic Image Detection with Generator-Agnostic Pixel Fluctuations"
 
 
 ## Table of Contents
@@ -12,9 +12,11 @@ An implementation code for paper "Beyond Boxes: Towards SHOI with Interactive Gr
 - [Acknowledgments](#acknowledgments)
 
 
-## Background
+## SLSP
 
-Human-object interaction (HOI) detection extends beyond the localization of humans and objects in images to identify the interactions between them. Existing approaches predominantly frame the HOI task as a detection problem, emphasizing the identification of human and object-bounding boxes alongside their interactions. However, we argue that this bounding-box-based paradigm is inherently limited in achieving fine-grained HOI detection due to its coarse localization. In this work, we focus on a more fine-grained case of the HOI: Segmentation-grounded Human-object Interaction (SHOI) detection. This new task shifts the focus from coarse bounding boxes to pixel-level masks, enabling more precise human-object interaction recognition. First, we introduce three benchmark datasets—VS-COCO, HICO-SG, and InterSeg to build the benchmark of SHOI and establish a comprehensive benchmark including a number of two-stage and one-stage models, systematically evaluating their effectiveness in SHOI detection. Furthermore, we introduce a novel baseline model, Ag-BiGT, agent-based query with bipartite graph-transformer.  Specifically, we first leverage a bipartite graph transformer to refine the human and object nodes by long-range and local context reasoning modules. Subsequently, we exploit multiple agents to generate spare-aware interaction queries integrated with the human-object pairs. Extensive experiments on both SHOI and HOI tasks demonstrate our proposed Ag-BiGT is superior to other state-of-the-art HOI models on a suite of SHOI and HOI datasets.  
+With the proliferation of powerful image generative models, accurately and robustly detecting synthetic images has become an increasingly challenging and important problem. Recent detection approaches often overfit to specific generators or dataset artifacts, limiting their generalizability. Our work revisits the fundamental statistical differences between real and generated images, focusing on the subtle stochastic pixel fluctuations that are inherently present in real photographs but largely missing or over-smoothed in synthetic ones.
+
+We propose Training-Free Skeptical Over-Smooth Region (TrSOR) Selection—a principled, generator-agnostic patch selection algorithm that identifies highly smooth, fluctuation-sensitive regions in an image via a statistical thresholding procedure based on local gradient energy. We then design a lightweight self-supervised pipeline to encode and reconstruct these patches, enabling generator-agnostic synthetic image detection without the need for any fake images during training.
 
 <p align='center'>  
   <img src='figure/model.jpg' width='800'/>
