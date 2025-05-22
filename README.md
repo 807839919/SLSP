@@ -12,7 +12,7 @@ An implementation code for paper "Secrets Lie in Smooth Patches: Synthetic Image
 - [Acknowledgments](#acknowledgments)
 
 
-## SLSP
+## Background
 
 With the proliferation of powerful image generative models, accurately and robustly detecting synthetic images has become an increasingly challenging and important problem. Recent detection approaches often overfit to specific generators or dataset artifacts, limiting their generalizability. Our work revisits the fundamental statistical differences between real and generated images, focusing on the subtle stochastic pixel fluctuations that are inherently present in real photographs but largely missing or over-smoothed in synthetic ones.
 
@@ -29,12 +29,15 @@ We propose Training-Free Skeptical Over-Smooth Region (TrSOR) Selection—a prin
 
 ## Datasets
 <p align='center'>  
-  <img src='Figure/data.jpg' width='800'/>
+  <img src='Figure/data.jpg' width='600'/>
 </p>
 
 
-Some examples of generated images in our Benchmark
 
+<p align='center'>  
+  <em>Some examples of generated images in our Benchmark.
+</em>
+</p>
 
 
 ## Dependency
@@ -55,16 +58,17 @@ yes | pip install wandb
 The resulting directory structure should be as follows:
 
 ``` bash
-├── configs
+data/datasets
 ├── data
-│   ├── VS-COCO
-│   │   ├── annotations
-|   │   │   ├── panoptic_train2017
-|   │   │   ├── panoptic_val2017
-│   │   ├── train2017
-│   │   └── val2017
-│   │   └── VS-COCO.json
-│   ├── ...
+│   ├── train_data
+│   │   ├── ImageNet
+│   │   ├── COCO
+│   │   ├── LSUN
+│   │   ├──...
+│   ├── test_data
+│   │   ├── GauGAN
+│   │   ├── StartGAN
+│   │   ├──...
 ├── pretrain
 ├── agbigt
 ├── scripts
@@ -98,5 +102,5 @@ python tools/test.py \
 
 ## Acknowledgments
 
-Ag-BiGT is developed based on [MMDetection](https://github.com/open-mmlab/mmdetection) and [STIP](https://github.com/zyong812/STIP). We sincerely appreciate the efforts of the developers from the previous codebase.
+Our work is developed based on [UViT](https://github.com/baofff/U-ViT), [SAFE](https://github.com/Ouxiang-Li/SAFE/) and [SPAI](https://mever-team.github.io/spai). We sincerely appreciate the efforts of the developers from the previous codebase.
 
