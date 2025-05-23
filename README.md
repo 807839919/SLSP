@@ -46,13 +46,18 @@ We propose Training-Free Skeptical Over-Smooth Region (TrSOR) Selection—a prin
 We recommend using Anaconda to set up the environment:
 
 ``` bash
-conda install pytorch==1.13.1 torchvision pytorch-cuda=11.7 -c pytorch -c nvidia -y
-yes | pip install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu117/torch1.13/index.html
-conda install scipy -c conda-forge -y
-yes | pip install mmcls==0.23.2
-yes | pip install mmdet==2.25.1
-yes | pip install git+https://github.com/facebookresearch/detectron2.git
-yes | pip install wandb
+# create conda environment
+conda create -n SLSP -y python=3.9
+conda activate SLSP
+
+# install dependencies
+pip install torch torchvision --extra-index-url https://download.pytorch.org/whl/cu116  # install torch-1.13.1
+pip install accelerate==0.12.0 absl-py ml_collections einops wandb ftfy==6.1.1 transformers==4.23.1
+pip install -r requirements.txt
+
+# xformers is optional, but it would greatly speed up the attention computation.
+pip install -U xformers
+pip install -U --pre triton
 ```
 ### Data Preparation
 The resulting directory structure should be as follows:
@@ -69,13 +74,7 @@ data/datasets
 │   │   ├── GauGAN
 │   │   ├── StartGAN
 │   │   ├──...
-├── pretrain
-├── agbigt
-├── scripts
-├── tools
-│   ├── train.py
-│   ├── test.py
-├── work_dirs
+├── model
 ├── ...
 ```
 
@@ -84,21 +83,20 @@ data/datasets
 ### Training
 
 ```bash
-#single GPU
-PYTHONPATH='.':$PYTHONPATH python configs/mask2former/agbigt.py
-
-#multi GPU
-PYTHONPATH='.':$PYTHONPATH bash tools/dist_train.sh configs/mask2former/agbigt.py 4
+        CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES nohup python -m torch.distributed.launch $DISTRIBUTED_ARGS main_finetune.py \
+            --input_size 256 \
+            --transform_mode 'crop' \
+            --model $MODEL \
+            --data_path "$train_data" \
+            --save_ckpt_freq 5 \
+            --batch_size 64 \
+            --warmup_epochs 10 \
+            --epochs 50 \
+            --num_workers 16 \
+            --output_dir $OUTPUT_PATH \
 ```
 
-### Testing
 
-```bash
-PYTHONPATH='.':$PYTHONPATH \
-python tools/test.py \
-    configs/deformable_detr/od_r101_coco.py \
-    pretrain/deformable_detr_r101_coco.pth \
-```
 
 ## Acknowledgments
 
